@@ -1,5 +1,5 @@
 {
-    "name": "runtime/frankenphp-symfony",
+    "name": "backbrain/frankenphp-symfony",
     "description": "FrankenPHP runtime for Symfony",
     "license": "MIT",
     "type": "library",

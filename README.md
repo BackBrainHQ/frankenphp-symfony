@@ -7,7 +7,7 @@ If you are new to the Symfony Runtime component, read more in the [main readme](
 ## Installation
 
 ```
-composer require runtime/frankenphp-symfony
+composer require backbrain/frankenphp-symfony
 ```
 
 ## Usage
