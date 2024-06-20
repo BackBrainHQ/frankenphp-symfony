@@ -6,6 +6,7 @@ namespace Runtime\FrankenPhpSymfony;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\HttpKernel\RebootableInterface;
 use Symfony\Component\HttpKernel\TerminableInterface;
 use Symfony\Component\Runtime\RunnerInterface;
@@ -50,7 +51,7 @@ class Runner implements RunnerInterface
             }
 
             if (!$ret) {
-                return 1;
+                return 0;
             }
 
             if ($this->loopMax > 0 && rand(1, $this->loopMax + 1) % ($this->loopMax + 1) === 0) {
@@ -59,6 +60,8 @@ class Runner implements RunnerInterface
 
             if ($this->kernel instanceof RebootableInterface && ('always' === $this->kernelReboot)) {
                 $this->kernel->reboot(null);
+            } elseif ($this->kernel instanceof KernelInterface && $this->kernel->getContainer()->has('services_resetter')) {
+                $this->kernel->getContainer()->get('services_resetter')->reset();
             }
 
             gc_collect_cycles();
